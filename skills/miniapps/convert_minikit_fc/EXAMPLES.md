@@ -57,7 +57,8 @@ export default function HomePage() {
 
   useEffect(() => {
     const init = async () => {
-      setContext(sdk.context);
+      const context = await sdk.context;
+      setContext(context);
       await sdk.actions.ready();
       setIsReady(true);
     };
@@ -229,7 +230,11 @@ export function UserProfile() {
   const [context, setContext] = useState<MiniAppContext | null>(null);
 
   useEffect(() => {
-    setContext(sdk.context);
+    const loadContext = async () => {
+      const ctx = await sdk.context;
+      setContext(ctx);
+    };
+    loadContext();
   }, []);
   
   if (!context?.user) {
@@ -262,7 +267,11 @@ export function useFarcasterContext() {
   const [context, setContext] = useState<MiniAppContext | null>(null);
 
   useEffect(() => {
-    setContext(sdk.context);
+    const loadContext = async () => {
+      const ctx = await sdk.context;
+      setContext(ctx);
+    };
+    loadContext();
   }, []);
 
   return context;
@@ -484,7 +493,7 @@ export default function HomePage() {
 
 | Pattern | MiniKit | Farcaster SDK |
 |---------|---------|---------------|
-| Get context | `useMiniKit().context` | `sdk.context` (direct) |
+| Get context | `useMiniKit().context` | `await sdk.context` |
 | Signal ready | `setFrameReady()` in useEffect | `await sdk.actions.ready()` |
 | Action handlers | Direct function call | Async function with await |
 | Provider | Required `<MiniKitProvider>` | Not needed |
