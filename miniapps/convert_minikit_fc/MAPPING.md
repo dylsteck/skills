@@ -77,9 +77,10 @@ function App() {
 
   useEffect(() => {
     const init = async () => {
-      // Get context first
-      setContext(sdk.context);
-      
+      // Get context first (must await - it's a Promise)
+      const context = await sdk.context;
+      setContext(context);
+
       // Signal ready to hide splash screen
       await sdk.actions.ready();
       setIsReady(true);

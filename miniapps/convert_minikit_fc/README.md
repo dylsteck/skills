@@ -16,7 +16,7 @@ MiniKit wraps the Farcaster SDK into React hooks. This skill helps Claude conver
 | MiniKit | Farcaster SDK |
 |---------|---------------|
 | `useMiniKit().setFrameReady()` | `await sdk.actions.ready()` |
-| `useMiniKit().context` | `sdk.context` |
+| `useMiniKit().context` | `await sdk.context` |
 | `useClose()` | `await sdk.actions.close()` |
 | `useOpenUrl()` | `await sdk.actions.openUrl(url)` |
 | `useViewProfile()` | `await sdk.actions.viewProfile({ fid })` |
@@ -72,7 +72,7 @@ Remove MiniKitProvider and use the native Farcaster SDK instead
 Find all MiniKit usage in your project:
 
 ```bash
-python scripts/analyze_project.py ./my-minikit-app
+python3 analyze_project.py ./my-minikit-app
 ```
 
 Output includes:
@@ -86,7 +86,7 @@ Output includes:
 After converting, verify everything is correct:
 
 ```bash
-python scripts/validate_conversion.py ./my-converted-app
+python3 validate_conversion.py ./my-converted-app
 ```
 
 Checks for:
@@ -113,7 +113,7 @@ Checks for:
 |--------|---------|---------------|
 | Setup | Requires `<MiniKitProvider>` | Direct import |
 | Hooks | React hooks | Direct async methods |
-| Context | `useMiniKit().context` | `sdk.context` |
+| Context | `useMiniKit().context` | `await sdk.context` |
 | Ready signal | `setFrameReady()` | `await sdk.actions.ready()` |
 | Manifest key | `frame` | `miniapp` |
 | Bundle | Includes OnchainKit | Minimal SDK only |
